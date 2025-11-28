@@ -22,8 +22,8 @@ class AboodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'|required,min=2,max=200|'
-            'email'=>'|required,'
+            'name'=>'|required,min=2,max=200|',
+            'email'=>'|required',
             
         ];
     }

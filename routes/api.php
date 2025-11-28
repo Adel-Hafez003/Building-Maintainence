@@ -5,6 +5,7 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TechnicianDetailController;
+use App\Http\Controllers\TechnicianRequestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -50,4 +51,20 @@ Route::middleware(['auth:sanctum','role:admin'])->prefix('admin')->group(functio
 });
  Route::get('/services', [ServiceController::class, 'index']);
     Route::get('/regions',  [RegionController::class, 'index']);
+
+    Route::middleware(['auth:sanctum','role:technician'])
+    ->prefix('technician/requests')
+    ->group(function () {
+        // يقبل طلب معلّق وغير معيَّن لفنّي آخر
+        Route::patch('{id}/accept',     [TechnicianRequestController::class, 'accept']);
+
+        // يعلِّم أنه بالطريق للعميل (بعد القبول)
+        Route::patch('{id}/on-the-way', [TechnicianRequestController::class, 'onTheWay']);
+
+        // يعلِّم الطلب كمكتمل
+        Route::patch('{id}/complete',   [TechnicianRequestController::class, 'complete']);
+
+        //  قائمة طلبات الفني الحالية
+        // Route::get('', [TechnicianRequestController::class, 'index']);
+    });
 
