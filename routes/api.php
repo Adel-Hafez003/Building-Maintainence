@@ -169,6 +169,7 @@ Route::middleware(['auth:sanctum','role:admin'])
     Route::get('banners',[BannerController::class,'index']);
 
     Route::post('/ai/classify-image',[AiController::class,'classifyImage']);
+    Route::post('/ai/classify-description', [AiController::class, 'classifyDescription']);
 
     
     

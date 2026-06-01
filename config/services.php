@@ -44,6 +44,8 @@ return [
     'exchange' => [
     'syp_per_usd' => (float) env('SYP_PER_USD', 14000),
 ],
+    'n8n' => [
+        'text_ai_url' => env('N8N_TEXT_AI_URL', 'http://localhost:5678/webhook-test/classify-damage-description'),
+],
 
-
-];
+];  

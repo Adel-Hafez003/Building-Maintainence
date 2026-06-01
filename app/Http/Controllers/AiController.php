@@ -34,4 +34,27 @@ class AiController extends Controller
             'data' => $response->json(),
         ]);
     }
+    public function classifyDescription(Request $request)
+    {
+        $request->validate([
+            'description' => 'required|string|max:2000',
+        ]);
+
+        $response = Http::post(config('services.n8n.text_ai_url'), [
+            'description' => $request->description,
+        ]);
+
+        if (!$response->successful()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Text AI service failed',
+                'error' => $response->body(),
+            ], 500);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $response->json(),
+        ]);
+    }
 }
