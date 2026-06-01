@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminTechnicianDetailController;
 use App\Http\Controllers\AdminRequestController;
 use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AdminRegionController;
+use App\Http\Controllers\AiController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NotificationTokenController;
@@ -166,6 +167,11 @@ Route::middleware(['auth:sanctum','role:admin'])
 
     //banners
     Route::get('banners',[BannerController::class,'index']);
+
+    Route::post('/ai/classify-image',[AiController::class,'classifyImage']);
+
+    
+    
 
 
 

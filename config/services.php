@@ -42,7 +42,7 @@ return [
 ],
 
     'exchange' => [
-    'syp_per_usd' => (float) env('SYP_PER_USD', 15000),
+    'syp_per_usd' => (float) env('SYP_PER_USD', 14000),
 ],
 
 

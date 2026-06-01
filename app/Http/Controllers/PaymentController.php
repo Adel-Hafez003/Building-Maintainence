@@ -30,7 +30,7 @@ class PaymentController extends Controller
             return $this->response(null, 'Already paid', 422);
         }
 
-        $rate = (float) config('services.exchange.syp_per_usd', 15000);
+        $rate = (float) config('services.exchange.syp_per_usd', 14000);
         $usdCents = (int) round((($item->final_price_syp / $rate) * 100));
         $usdCents = max(50, $usdCents);
 
