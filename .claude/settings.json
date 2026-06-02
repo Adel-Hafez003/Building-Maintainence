@@ -18,7 +18,10 @@
       "PowerShell(php artisan route:list --path=commission)",
       "PowerShell(php artisan tinker --execute=\"echo App\\\\Models\\\\AppSetting::get\\('owner_name'\\).'|'.App\\\\Models\\\\AppSetting::get\\('owner_phone'\\).'|'.App\\\\Models\\\\AppSetting::get\\('owner_governorate'\\);\")",
       "PowerShell(php artisan tinker --execute=\"echo 'default disk: '.config\\('filesystems.default'\\);\")",
-      "PowerShell(php artisan route:list --path=admin/banners)"
+      "PowerShell(php artisan route:list --path=admin/banners)",
+      "Bash(php -l \"app/Http/Controllers/MediaController.php\")",
+      "Bash(php -l \"app/Http/Controllers/TechnicianRequestController.php\")",
+      "Bash(php -l \"routes/api.php\")"
     ]
   }
 }

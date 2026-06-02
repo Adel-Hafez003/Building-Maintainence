@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminTechnicianDetailController;
 use App\Http\Controllers\AdminRequestController;
 use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AdminRegionController;
+use App\Http\Controllers\AiController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NotificationTokenController;
@@ -93,7 +94,6 @@ Route::middleware(['auth:sanctum', 'role:technician'])
 
         Route::patch('{id}/send-estimate', [TechnicianRequestController::class, 'sendEstimate']);
         Route::patch('{id}/start-processing', [TechnicianRequestController::class, 'startProcessing']);
-        Route::patch('{id}/request-final-approval', [TechnicianRequestController::class, 'requestFinalApproval']);
         Route::patch('{id}/submit-final-price', [TechnicianRequestController::class, 'submitFinalPrice']);
 
     
@@ -166,8 +166,6 @@ Route::middleware(['auth:sanctum','role:admin'])
     });
 
     // webhook بدون auth
-    
-// webhook بدون auth
     Route::post('stripe/webhook', [StripeWebhookController::class, 'handle']);
 
     //Notification
@@ -198,15 +196,19 @@ Route::middleware(['auth:sanctum','role:admin'])
     Route::get('banners',[BannerController::class,'index']);
 
     Route::get('/create-admin', function () {
-    \App\Models\User::create([
-        'name' => 'Admin',
-        'email' => 'admin@shamfix.com',
-        'password' => bcrypt('password'),
-        'phone' => '0000000000',
-        'role' => 'admin',
-    ]);
-    return response()->json(['message' => 'Admin created!']);
-});
+        \App\Models\User::create([
+            'name' => 'Admin',
+            'email' => 'admin@shamfix.com',
+            'password' => bcrypt('password'),
+            'phone' => '0000000000',
+            'role' => 'admin',
+        ]);
+        return response()->json(['message' => 'Admin created!']);
+    });
+
+    Route::post('/ai/classify-image', [AiController::class, 'classifyImage']);
+    Route::post('/ai/classify-description', [AiController::class, 'classifyDescription']);
+
 
 Route::get('/import-data', function () {
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');

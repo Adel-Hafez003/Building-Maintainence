@@ -48,12 +48,9 @@ class MediaController extends Controller
             if (!($user->role === 'technician' && $req->technician_id === $user->id)) {
                 return $this->response(null, 'Only the assigned technician can upload AFTER images', 403);
             }
-           if ($data['type'] === 'after') {
-                if (!in_array($req->status, ['complete'])) {
-                      return $this->response(null, 'You can upload AFTER only after complete', 422);
-    }
-} 
-            
+            if (!in_array($req->status, ['processing', 'completed'])) {
+                return $this->response(null, 'You can upload AFTER only while the request is in progress or completed', 422);
+            }
         }
 
         // حفظ الملف: storage/app/public/requests/{id}/{type}/filename.ext

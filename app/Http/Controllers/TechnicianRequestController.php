@@ -9,6 +9,7 @@ use App\Models\TechnicianDetail;
 use App\Services\FirebaseNotificationService;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TechnicianRequestController extends Controller
 {
@@ -292,11 +293,18 @@ class TechnicianRequestController extends Controller
             return $this->response(null, 'Final price cannot exceed approved total price', 422);
         }
 
-        $item->update([
-            'final_price_syp' => $data['final_price_syp'],
-            'status' => 'completed',
-            'completed_at' => now(),
-        ]);
+        if (!$item->media()->where('type', 'after')->exists()) {
+            return $this->response(null, 'Upload an after-repair photo before submitting the final price.', 422);
+        }
+
+        DB::transaction(function () use ($item, $data) {
+            $item->update([
+                'final_price_syp' => $data['final_price_syp'],
+                'status' => 'completed',
+                'completed_at' => now(),
+            ]);
+        });
+
         $firebase->sendRequestStatusNotification($item);
         return $this->response(new RequestResource($item->fresh()->load('additions')));
     }
