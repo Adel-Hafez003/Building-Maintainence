@@ -94,7 +94,6 @@ Route::middleware(['auth:sanctum', 'role:technician'])
 
         Route::patch('{id}/send-estimate', [TechnicianRequestController::class, 'sendEstimate']);
         Route::patch('{id}/start-processing', [TechnicianRequestController::class, 'startProcessing']);
-        Route::patch('{id}/request-final-approval', [TechnicianRequestController::class, 'requestFinalApproval']);
         Route::patch('{id}/submit-final-price', [TechnicianRequestController::class, 'submitFinalPrice']);
 
     

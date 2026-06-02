@@ -48,5 +48,7 @@ return [
     'n8n' => [
         'text_ai_url' => env('N8N_TEXT_AI_URL', 'http://localhost:5678/webhook-test/classify-damage-description'),
     ],
-
+'n8n' => [
+        'text_ai_url' => env('N8N_TEXT_AI_URL', 'http://localhost:5678/webhook-test/classify-damage-description'),
+],
 ];
