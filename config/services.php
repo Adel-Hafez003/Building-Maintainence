@@ -36,22 +36,17 @@ return [
     ],
 
     'stripe' => [
-    'secret' => env('STRIPE_SECRET'),
-    'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
-    'currency' => env('STRIPE_CURRENCY', 'usd'),
-],
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'currency' => env('STRIPE_CURRENCY', 'usd'),
+    ],
 
     'exchange' => [
-    'syp_per_usd' => (float) env('SYP_PER_USD', 15000),
-],
-'stripe' => [
-    'secret' => env('STRIPE_SECRET'),
-    'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
-    'currency' => env('STRIPE_CURRENCY', 'usd'),
-],
+        'syp_per_usd' => (float) env('SYP_PER_USD', 14000),
+    ],
 
-    'exchange' => [
-    'syp_per_usd' => (float) env('SYP_PER_USD', 14000),
-],
+    'n8n' => [
+        'text_ai_url' => env('N8N_TEXT_AI_URL', 'http://localhost:5678/webhook-test/classify-damage-description'),
+    ],
 
 ];
